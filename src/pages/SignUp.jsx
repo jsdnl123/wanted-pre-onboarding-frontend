@@ -65,7 +65,6 @@ const SignUp = () => {
         onChange={onChangeCheckEmail}
         data-testid="email-input"
         onKeyDown={(e) => {
-          console.log(e.code);
           if (e.code === "Enter") {
             onClickRegister();
           }
@@ -76,7 +75,6 @@ const SignUp = () => {
         onChange={onChangeCheckPW}
         data-testid="password-input"
         onKeyDown={(e) => {
-          console.log(e.code);
           if (e.code === "Enter") {
             onClickRegister();
           }

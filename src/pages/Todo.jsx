@@ -93,10 +93,10 @@ const Todo = () => {
     };
     fetch(url, config).then((res) => {
       setEditData({ ...editData, isEditMode: false });
+      getTodos();
     });
   };
   const isChecked = (e) => {
-    console.log(e);
     setIsCompleted(e.target.checked);
   };
 
@@ -127,6 +127,11 @@ const Todo = () => {
         type="text"
         data-testid="new-todo-input"
         value={todoInput}
+        onKeyDown={(e) => {
+          if (e.code === "Enter" && e.nativeEvent.isComposing === true) {
+            onClickCreateTodo();
+          }
+        }}
       />
       <button onClick={onClickCreateTodo} data-testid="new-todo-add-button">
         추가

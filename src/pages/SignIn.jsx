@@ -50,11 +50,9 @@ const SignIn = () => {
     };
     fetch(url, config)
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         const accessToken = data.access_token;
         localStorage.setItem("token", accessToken);
         navigator("/");
@@ -67,7 +65,6 @@ const SignIn = () => {
         onChange={onChangeCheckEmail}
         data-testid="email-input"
         onKeyDown={(e) => {
-          console.log(e.code);
           if (e.code === "Enter") {
             onClickLogin();
           }
@@ -78,7 +75,6 @@ const SignIn = () => {
         onChange={onChangeCheckPW}
         data-testid="password-input"
         onKeyDown={(e) => {
-          console.log(e.code);
           if (e.code === "Enter") {
             onClickLogin();
           }
