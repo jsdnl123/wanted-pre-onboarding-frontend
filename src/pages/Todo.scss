@@ -1,0 +1,58 @@
+.wrapper{
+    width: 768px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.input {
+    align-items: center;
+    background:#495057;
+    display: flex;
+    align-items: center;
+    input {
+        background:none;
+        padding: 0.5rem;
+    border: none;
+    margin: 0 auto;
+        width: 90%;
+        height: 30px;
+        color:white;
+        font-size:1.125rem;
+        line-height: 1.5;
+        &::placeholder {
+            color: #dee2e6;
+        }
+    }
+    button {
+        display: flex;
+        float: right;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        background: none;
+        border: none;
+        background: #868e96;
+    }
+}
+
+.todo {
+    text-align: left;
+    background: rgb(4, 173, 173);
+    font-size: 1.5rem;
+    li {
+        border-bottom: 1px solid black ;
+        list-style: none;
+    }
+    span{
+        background: none;
+        color: white;}
+
+    button {
+        display: flex;
+        float: right;
+        font-size: 1.125rem;
+        height: auto;
+        font-weight: bold;
+        color: rgb(8, 110, 110);
+    }
+}

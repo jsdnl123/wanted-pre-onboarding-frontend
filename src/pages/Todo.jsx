@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Todo.scss";
 
 const Todo = () => {
   const token = localStorage.getItem("token");
@@ -121,81 +122,35 @@ const Todo = () => {
     setEditData({ ...editData, isEditMode: false });
   };
   return (
-    <>
-      <input
-        onChange={onChangeTodoInput}
-        type="text"
-        data-testid="new-todo-input"
-        value={todoInput}
-        onKeyDown={(e) => {
-          if (e.code === "Enter" && e.nativeEvent.isComposing === true) {
-            onClickCreateTodo();
-          }
-        }}
-      />
-      <button onClick={onClickCreateTodo} data-testid="new-todo-add-button">
-        추가
-      </button>
-      {!editData.isEditMode
-        ? todo.map((todo) => {
-            if (todo.id > 0) {
-              return (
-                <li key={todo.id}>
-                  <label>
-                    <input
-                      onChange={isChecked}
-                      type="checkbox"
-                      defaultChecked={todo.isCompleted}
-                    />
-                    <span>{todo.todo}</span>
-                    <button
-                      onClick={() => onClickEdit(todo)}
-                      data-testid="modify-button"
-                    >
-                      수정
-                    </button>
-                    <button
-                      onClick={() => onClickDeleteBtn(todo.id)}
-                      data-testid="delete-button"
-                    >
-                      삭제
-                    </button>
-                  </label>
-                </li>
-              );
+    <div className="wrapper">
+      <div className="input">
+        <input
+          onChange={onChangeTodoInput}
+          type="text"
+          data-testid="new-todo-input"
+          value={todoInput}
+          placeholder="할 일을 입력하세요"
+          onKeyDown={(e) => {
+            if (e.code === "Enter" && e.nativeEvent.isComposing === false) {
+              onClickCreateTodo();
             }
-          })
-        : todo.map((todo) => {
-            return (
-              <li key={todo.id}>
-                <label>
-                  {editData.editId === todo.id ? (
-                    <>
-                      <input type="checkbox" onChange={isChecked} />
+          }}
+        />
+        <button onClick={onClickCreateTodo} data-testid="new-todo-add-button">
+          +
+        </button>
+      </div>
+      <div className="todo">
+        {!editData.isEditMode
+          ? todo.map((todo) => {
+              if (todo.id > 0) {
+                return (
+                  <li key={todo.id}>
+                    <label>
                       <input
-                        onChange={onChangeEditInput}
-                        type="text"
-                        defaultValue={todo.todo}
-                      />
-                      <button
-                        onClick={() => onClickSubmit(todo.id)}
-                        data-testid="submit-button"
-                      >
-                        제출
-                      </button>
-                      <button
-                        onClick={onClickCancel}
-                        data-testid="cancel-button"
-                      >
-                        취소
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <input
+                        onChange={isChecked}
                         type="checkbox"
                         defaultChecked={todo.isCompleted}
-                        onChange={() => isChecked(todo.id)}
                       />
                       <span>{todo.todo}</span>
                       <button
@@ -210,13 +165,64 @@ const Todo = () => {
                       >
                         삭제
                       </button>
-                    </>
-                  )}
-                </label>
-              </li>
-            );
-          })}
-    </>
+                    </label>
+                  </li>
+                );
+              }
+            })
+          : todo.map((todo) => {
+              return (
+                <li key={todo.id}>
+                  <label>
+                    {editData.editId === todo.id ? (
+                      <>
+                        <input type="checkbox" onChange={isChecked} />
+                        <input
+                          onChange={onChangeEditInput}
+                          type="text"
+                          defaultValue={todo.todo}
+                        />
+                        <button
+                          onClick={() => onClickSubmit(todo.id)}
+                          data-testid="submit-button"
+                        >
+                          제출
+                        </button>
+                        <button
+                          onClick={onClickCancel}
+                          data-testid="cancel-button"
+                        >
+                          취소
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          type="checkbox"
+                          defaultChecked={todo.isCompleted}
+                          onChange={() => isChecked(todo.id)}
+                        />
+                        <span>{todo.todo}</span>
+                        <button
+                          onClick={() => onClickEdit(todo)}
+                          data-testid="modify-button"
+                        >
+                          수정
+                        </button>
+                        <button
+                          onClick={() => onClickDeleteBtn(todo.id)}
+                          data-testid="delete-button"
+                        >
+                          삭제
+                        </button>
+                      </>
+                    )}
+                  </label>
+                </li>
+              );
+            })}
+      </div>
+    </div>
   );
 };
 export default Todo;
